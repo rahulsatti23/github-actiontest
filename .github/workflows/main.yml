@@ -21,10 +21,15 @@ jobs:
     - name: Test SSH connection
       run: |
         ssh -o StrictHostKeyChecking=no -T ${{ secrets.UBUNTU_USER }}@${{ secrets.UBUNTU_HOST }}
-
+    - name: Add SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.UBUNTU_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
     - name: Copy files to EC2
       run: |
-        scp -r -o StrictHostKeyChecking=no ./* ${{ secrets.UBUNTU_USER }}@${{ secrets.UBUNTU_HOST }}:~/myapp/
+        run: ssh -o StrictHostKeyChecking=no -T ${{ secrets.UBUNTU_USER }}@${{ secrets.UBUNTU_HOST }}:~/myapp/
+  
 
     - name: Deploy on EC2
       run: |
