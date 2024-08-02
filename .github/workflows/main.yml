@@ -20,11 +20,11 @@ jobs:
 
     - name: Test SSH connection
       run: |
-        ssh -o StrictHostKeyChecking=no -T ${{ secrets.ubuntu_user }}@${{ secrets.ubuntu_host }}
+        ssh -o StrictHostKeyChecking=no -B ${{ secrets.ubuntu_user }}@${{ secrets.ubuntu_host }}
     
     - name: Copy files to EC2
       run: |
-        run: ssh -o StrictHostKeyChecking=no -T ${{ secrets.ubuntu_user}}@${{ secrets.ubuntu_host }}:~/myapp/
+        run: ssh -o StrictHostKeyChecking=no -B ${{ secrets.ubuntu_user}}@${{ secrets.ubuntu_host }}:~/myapp/
   
 
     - name: Deploy on EC2
