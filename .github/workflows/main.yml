@@ -20,17 +20,17 @@ jobs:
 
     - name: Test SSH connection
       run: |
-       run: ssh -o StrictHostKeyChecking=no -T ${{ secrets.UBUNTU_USER }}@${{ secrets.UBUNTU_HOST }} "uptime && whoami"
+       run: ssh -o StrictHostKeyChecking=no -T ${{ secrets.rahulubuntu_USER }}@${{ secrets.rahulubuntu_HOST }} "uptime && whoami"
 
     
     - name: Copy files to EC2
       run: |
-        run: ssh -o StrictHostKeyChecking=no -T ${{ secrets.UBUNTU_USER}}@${{ UBUNTU_HOST }}:~/myapp/
+        run: ssh -o StrictHostKeyChecking=no -T ${{ secrets.rahulubuntu_USER}}@${{ rahulubuntu_HOST }}:~/myapp/
   
 
     - name: Deploy on EC2
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.UBUNTU_USER }}@${{ secrets.UBUNTU_HOST }} << 'EOF'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.rahulubuntu_USER }}@${{ secrets.rahulubuntu_HOST }} << 'EOF'
         cd ~/myapp
         sudo docker-compose down
         sudo docker-compose up -d --build
